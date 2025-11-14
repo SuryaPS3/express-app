@@ -10,10 +10,20 @@ app.get('/',(req,res)=>{
     res.send("Hello Express");
 })
 
-// now we'll create routes for 
-app.get('/user/:name/:id',(req,res)=>{
-    const {name,id} = req.params;
-    res.json({name,id});
+app.get('/user/:name/:age',(req,res)=>{
+    const {name,age} = req.params;
+    
+    // Validate age is a 2-digit number
+    if (!/^[0-9]{2}$/.test(age)) {
+        return res.status(400).json({error: 'Age must be a 2-digit number'});
+    }
+    
+    res.json({name,age});
+})
+
+// catch all error route (must be last)
+app.use((req,res)=>{
+    res.status(404).send("Sorry, page not found");
 })
 //to start the server
 app.listen(PORT,()=>{
