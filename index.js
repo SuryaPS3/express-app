@@ -10,25 +10,10 @@ app.get('/',(req,res)=>{
     res.send("Hello Express");
 })
 
-app.get('/user/login',userLogin);
-app.get('/user/signup',userSignup);
-//dynamic route 
-app.get('/user/:username',(req,res)=>{
-    const uname = req.params.username;
-    res.send(`Hello, ${uname}`);
-});
-
-//adding post method
-app.post('/user/create',express.json(),(req,res)=>{
-    const {name,email} =  req.body;
-    res.json({message:`User ${name} with email ${email} created successfully`});
-})
-
-//adding put request using Params(used to update data)
-app.put('/user/update/:username',express.json(),(req,res)=>{
-    const uname = req.params.username;
-    const {email} = req.body;
-    res.json({message:`User ${uname} updated with email ${email}`});
+// now we'll create routes for 
+app.get('/user/:name/:id',(req,res)=>{
+    const {name,id} = req.params;
+    res.json({name,id});
 })
 //to start the server
 app.listen(PORT,()=>{
