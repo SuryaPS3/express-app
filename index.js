@@ -24,6 +24,12 @@ app.post('/user/create',express.json(),(req,res)=>{
     res.json({message:`User ${name} with email ${email} created successfully`});
 })
 
+//adding put request using Params(used to update data)
+app.put('/user/update/:username',express.json(),(req,res)=>{
+    const uname = req.params.username;
+    const {email} = req.body;
+    res.json({message:`User ${uname} updated with email ${email}`});
+})
 //to start the server
 app.listen(PORT,()=>{
     console.log(`Server is running on http://localhost:${PORT}`);
